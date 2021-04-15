@@ -2,24 +2,24 @@
 // https://on.cypress.io/intelligent-code-completion
 /// <reference types="cypress" />
 
-describe('Example Cypress TodoMVC test', () => {
+import { recurse } from 'cypress-recurse'
+
+describe('Email confirmation', () => {
   beforeEach(() => {
-    // usually we recommend setting baseUrl in cypress.json
-    // but for simplicity of this example we just use it here
-    // https://on.cypress.io/visit
-    cy.visit('http://todomvc.com/examples/vue/')
+    cy.task('resetEmails')
   })
 
-  it('adds 2 todos', function () {
-    cy.get('.new-todo')
-      .type('learn testing{enter}')
-      .type('be cool{enter}')
-    cy.get('.todo-list li').should('have.length', 2)
+  it('receives an email', () => {
+    recurse(
+      () => cy.task('getLastEmail', 'cy-user@startup.io'),
+      Cypress._.isString,
+      {
+        log: false,
+        delay: 1000,
+        timeout: 20000,
+      },
+    ).then((html) => {
+      cy.document().invoke({ log: false }, 'write', html)
+    })
   })
-
-  // more examples
-  //
-  // https://github.com/cypress-io/cypress-example-todomvc
-  // https://github.com/cypress-io/cypress-example-kitchensink
-  // https://on.cypress.io/writing-your-first-test
 })
