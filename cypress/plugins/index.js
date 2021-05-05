@@ -1,23 +1,24 @@
 /// <reference types="cypress" />
 const ms = require('smtp-tester')
-const port = 7777
 
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  // starts the SMTP server at localhost:7777
+  const port = 7777
   const mailServer = ms.init(port)
   console.log('mail server at port %d', port)
 
-  // [receiver email]: email HTML or plaintext
+  // [receiver email]: email text
   let lastEmail = {}
 
   // process all emails
   mailServer.bind((addr, id, email) => {
-    console.log('--- email ---')
-    console.log(addr, id, email)
+    console.log('--- email to %s ---', email.headers.to)
+    console.log(email.body)
+    console.log('--- end ---')
+    // store the email by the receiver email
     lastEmail[email.headers.to] = email.html || email.body
   })
 

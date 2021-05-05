@@ -15,7 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "10.2.5",
-    "cypress": "7.1.0",
+    "cypress": "7.2.0",
     "cypress-recurse": "1.8.1",
     "nodemailer": "6.5.0",
     "postcss": "8.2.13",

@@ -33,5 +33,20 @@ describe('Email confirmation', () => {
       name: 'Joe Bravo',
       email: 'joe@acme.io',
     })
+
+    // by now the SMTP server has probably received the email
+    cy.task('getLastEmail', 'joe@acme.io')
+      .then(cy.wrap)
+      // Tip: modern browsers supports named groups
+      .invoke('match', /code is (?<code>\w+)/)
+      // the confirmation code
+      .its('groups.code')
+      .should('be.a', 'string')
+      .then((code) => {
+        cy.get('#confirmation_code').type(code)
+        cy.get('button[type=submit]').click()
+        cy.get('[data-cy=incorrect-code]').should('not.exist')
+        cy.get('[data-cy=confirmed-code]').should('be.visible')
+      })
   })
 })
