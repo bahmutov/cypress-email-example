@@ -1,6 +1,26 @@
+import Router from 'next/router'
 import 'tailwindcss/tailwind.css'
 
 export default function Home() {
+  const sendConfirmationCode = async (event) => {
+    event.preventDefault()
+
+    const data = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+      companySize: event.target.company_size.value,
+    }
+    console.log(data)
+    const res = await fetch('/api/register', {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    })
+
+    Router.push('/confirm')
+  }
   return (
     <main className="mt-12 lg:mt-32">
       <section className="container mx-auto px-6">
@@ -19,7 +39,10 @@ export default function Home() {
             </p>
           </div>
           <div className="w-full lg:w-1/2 lg:pl-24">
-            <form action="#" className="bg-gray-100 shadow-sm rounded-md p-8">
+            <form
+              onSubmit={sendConfirmationCode}
+              className="bg-gray-100 shadow-sm rounded-md p-8"
+            >
               <div className="mb-6">
                 <label htmlFor="name" className="mb-3 block text-gray-700">
                   Full name:
@@ -67,7 +90,7 @@ export default function Home() {
                 type="submit"
                 className="py-3 px-12 bg-green-300 hover:bg-green-600 mr-5 rounded-md text-white text-lg focus:outline-none w-full"
               >
-                Request Demo
+                Get confirmation code
               </button>
             </form>
           </div>

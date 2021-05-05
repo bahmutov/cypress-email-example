@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "next dev"
+    "start": "next dev",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "local": "start-test 3000 cy:open"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,7 @@
     "postcss": "8.2.13",
     "prettier": "2.2.1",
     "smtp-tester": "1.2.0",
+    "start-server-and-test": "1.12.1",
     "tailwindcss": "2.1.2"
   },
   "dependencies": {
