@@ -1,7 +1,22 @@
-export default (req, res) => {
+const emailer = require('../../emailer')
+
+export default async (req, res) => {
   if (req.method === 'POST') {
     const { name, email, companySize } = req.body
-    return res.status(200).json({ name, email })
+    // return to the caller right away
+    res.status(200).json({ name, email })
+
+    // and then send an email
+    const info = await emailer.sendMail({
+      from: '"Registration system" <reg@company.co>',
+      to: email,
+      subject: 'Confirmation code 1️⃣2️⃣3️⃣',
+      text: 'Your confirmation code is 654agc',
+      html: 'Your confirmation code is 654agc',
+    })
+    console.log('sent a confirmation email to %s', email)
+
+    return
   }
 
   return res.status(404)

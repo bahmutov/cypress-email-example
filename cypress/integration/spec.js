@@ -3,6 +3,10 @@
 /// <reference types="cypress" />
 
 describe('Email confirmation', () => {
+  beforeEach(() => {
+    cy.task('resetEmails')
+  })
+
   it('sends an email', () => {
     cy.visit('/')
     cy.get('#name').type('Joe Bravo')
