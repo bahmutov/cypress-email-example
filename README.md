@@ -1,4 +1,4 @@
-# cypress-email-example
+# cypress-email-example ![cypress version](https://img.shields.io/badge/cypress-7.2.0-brightgreen)
 
 Sending emails using [nodemailer](https://nodemailer.com/about/), receive the using [smtp-tester](https://github.com/deitch/smtp-tester) and testing the received email using [Cypress](https://github.com/cypress-io/cypress).
 
