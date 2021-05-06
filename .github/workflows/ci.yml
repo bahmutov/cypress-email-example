@@ -15,3 +15,6 @@ jobs:
         with:
           start: npm start
           wait: 'http://localhost:3000'
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
