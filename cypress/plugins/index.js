@@ -19,7 +19,10 @@ module.exports = (on, config) => {
     console.log(email.body)
     console.log('--- end ---')
     // store the email by the receiver email
-    lastEmail[email.headers.to] = email.html || email.body
+    lastEmail[email.headers.to] = {
+      body: email.body,
+      html: email.html,
+    }
   })
 
   on('task', {

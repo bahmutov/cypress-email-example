@@ -1,4 +1,13 @@
+const { readFileSync } = require('fs')
+const { join } = require('path')
 const emailer = require('../../emailer')
+
+const confirmationEmailPath = join(
+  process.cwd(), // should be the root folder of the project
+  'emails',
+  'confirmation-code.html',
+)
+const confirmationEmailHTML = readFileSync(confirmationEmailPath, 'utf-8')
 
 export default async (req, res) => {
   if (req.method === 'POST') {
@@ -12,7 +21,7 @@ export default async (req, res) => {
       to: email,
       subject: 'Confirmation code 1️⃣2️⃣3️⃣',
       text: 'Your confirmation code is 654agc',
-      html: 'Your confirmation code is 654agc',
+      html: confirmationEmailHTML,
     })
     console.log('sent a confirmation email to %s', email)
 
