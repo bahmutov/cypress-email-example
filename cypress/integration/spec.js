@@ -51,7 +51,7 @@ describe('Email confirmation', () => {
       })
   })
 
-  it.only('sends an HTML email', () => {
+  it('sends an HTML email', () => {
     cy.visit('/')
     cy.get('#name').type('Joe Bravo')
     cy.get('#email').type('joe@acme.io')
@@ -92,9 +92,12 @@ describe('Email confirmation', () => {
       .should('be.visible')
       // I have added small wait to make sure the video shows the email
       // otherwise it passes way too quickly!
-      .wait(1000)
+      .wait(2000)
     cy.contains('Confirm registration').click()
     cy.location('pathname').should('equal', '/confirm')
-    // we have already tested the confirmation page in other tests
+    cy.get('#confirmation_code').type('654agc')
+    cy.get('button[type=submit]').click()
+    cy.get('[data-cy=incorrect-code]').should('not.exist')
+    cy.get('[data-cy=confirmed-code]').should('be.visible')
   })
 })
