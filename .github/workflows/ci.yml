@@ -14,3 +14,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
+          wait: 'http://localhost:3000'
