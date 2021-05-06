@@ -10,16 +10,34 @@ describe('Email confirmation', () => {
   })
 
   it('receives an email', () => {
-    recurse(
-      () => cy.task('getLastEmail', 'cy-user@startup.io'),
-      Cypress._.isString,
-      {
-        log: false,
-        delay: 1000,
-        timeout: 20000,
+    // the destination email
+    const email = 'cy-user@startup.io'
+    // call the API endpoint ourselves, which sends an email
+    cy.request({
+      url: '/api/register',
+      method: 'POST',
+      body: {
+        name: 'Test User',
+        email,
+        companySize: '3',
       },
-    ).then((html) => {
-      cy.document().invoke({ log: false }, 'write', html)
     })
+
+    recurse(() => cy.task('getLastEmail', email), Cypress._.isObject, {
+      log: false,
+      delay: 1000,
+      timeout: 20000,
+    })
+      .should('have.keys', ['body', 'html'])
+      .its('html')
+      .then((html) => {
+        cy.log('**HTML email**')
+        const doNotLog = { log: false }
+        cy.document(doNotLog).invoke(doNotLog, 'write', html)
+      })
+
+    cy.screenshot('the email')
+    cy.contains('a', 'Confirm registration').should('be.visible')
+    cy.contains('the confirmation code').should('be.visible')
   })
 })

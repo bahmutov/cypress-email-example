@@ -58,6 +58,7 @@ describe('Email confirmation', () => {
     cy.get('#company_size').select('3')
 
     cy.intercept('POST', '/api/register').as('register')
+    cy.screenshot('1-registration')
     cy.get('button[type=submit]').click()
 
     cy.log('**redirects to /confirm**')
@@ -86,6 +87,7 @@ describe('Email confirmation', () => {
         cy.document().invoke('write', html)
       })
 
+    cy.screenshot('2-the-email')
     // by now the HTML email should be displayed in the app iframe
     // let's confirm the confirmation code and the link
     cy.contains('654agc')
@@ -99,5 +101,6 @@ describe('Email confirmation', () => {
     cy.get('button[type=submit]').click()
     cy.get('[data-cy=incorrect-code]').should('not.exist')
     cy.get('[data-cy=confirmed-code]').should('be.visible')
+    cy.screenshot('3-confirmed')
   })
 })
