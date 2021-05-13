@@ -7,6 +7,8 @@ Sending emails using [nodemailer](https://nodemailer.com/about/), receive the us
 
 See [cypress/integration/spec.js](./cypress/integration/spec.js)
 
+Read the blog post [Testing HTML Emails using Cypress](https://www.cypress.io/blog/2021/05/11/testing-html-emails-using-cypress/) and watch [this video](https://youtu.be/16WTH7XeIVw) where I explain the entire testing process.
+
 ## Install and run
 
 ```shell
