@@ -36,10 +36,10 @@ module.exports = (on, config) => {
       return null
     },
 
-    getLastEmail(email) {
+    getLastEmail(userEmail) {
       // cy.task cannot return undefined
       // thus we return null as a fallback
-      return lastEmail[email] || null
+      return lastEmail[userEmail] || null
     },
   })
 }
