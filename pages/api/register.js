@@ -1,4 +1,4 @@
-const { readFileSync } = require('fs')
+const { readFileSync, writeFileSync } = require('fs')
 const { join } = require('path')
 const emailer = require('../../emailer')
 
@@ -25,6 +25,11 @@ export default async (req, res) => {
         html: confirmationEmailHTML,
       })
       console.log('sent a confirmation email to %s', email)
+
+      // save a copy of the HTML email to enable easier debugging
+      const outputFile = 'sent-email.html'
+      writeFileSync(outputFile, confirmationEmailHTML)
+      console.log('saved a copy of the sent email to %s', outputFile)
     } catch (e) {
       console.error('Problem sending an email to %s', email)
       console.error(e)
