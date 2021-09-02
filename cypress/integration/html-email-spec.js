@@ -21,7 +21,7 @@ describe('Email confirmation', () => {
         // load the email in the current test browser
         cy.document().invoke('write', html)
       })
-    cy.contains('654agc')
+    cy.contains('#message', '654agc')
       .should('be.visible')
       // I have added small wait to make sure the video shows the email
       // otherwise it passes way too quickly!
