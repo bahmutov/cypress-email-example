@@ -17,7 +17,7 @@
     "autoprefixer": "10.2.5",
     "cypress": "8.4.1",
     "cypress-recurse": "1.8.1",
-    "nodemailer": "6.6.3",
+    "nodemailer": "6.6.5",
     "postcss": "8.2.13",
     "prettier": "2.2.1",
     "smtp-tester": "1.2.0",
