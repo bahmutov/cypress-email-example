@@ -16,7 +16,7 @@
   "devDependencies": {
     "autoprefixer": "10.2.5",
     "cypress": "9.5.2",
-    "cypress-recurse": "1.19.0",
+    "cypress-recurse": "1.20.0",
     "nodemailer": "6.7.3",
     "postcss": "8.2.13",
     "prettier": "2.2.1",
