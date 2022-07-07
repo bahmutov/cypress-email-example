@@ -20,7 +20,7 @@
     "nodemailer": "6.7.7",
     "postcss": "8.2.13",
     "prettier": "2.2.1",
-    "smtp-tester": "1.2.0",
+    "smtp-tester": "2.0.0",
     "start-server-and-test": "1.12.1",
     "tailwindcss": "2.1.2"
   },
