@@ -11,7 +11,7 @@ jobs:
       # and run E2E tests using Cypress GitHub action
       # https://github.com/cypress-io/github-action
       - name: Run tests 🧪
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v7.4.0
         with:
           start: npm start
           wait: 'http://localhost:3000'
